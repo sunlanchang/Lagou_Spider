@@ -19,35 +19,47 @@ class LagouCrawl(object):
             "needAddtionalResult": False,
             "isSchoolJob": 0
         }
-        self.page = 1
         # 表单数据
         self.data = {
             "first": True,
-            "pn": 1,
+            "pn": '1',
             "kd": 'python'
         }
+        self.cnt = 1
 
-    def start_crawl(self):
+    def start_crawl(self, page):
+        self.data['pn'] = str(page)
         response = requests.post(
             self.url, params=self.params, data=self.data, headers=self.headers)
         data = response.content.decode('utf-8')
         dict_data = json.loads(data)
-        for i in range(0, 15):
-            positionId = dict_data['content']['positionResult']['result'][i]['positionId']
-            print(i)
-            print(positionId)
+        return dict_data
 
-        # P = 0
-        # with open("data1.txt", "a", encoding="utf-8") as f:
-        #     P += 1
-        #     f.write("page: "+str(P)+"\n")
-        #     f.write(data)
+    def save(self, data):
+        position_list = data["content"]["positionResult"]["result"]
+
+        col = ['positionId', 'positionLables', 'positionName', 'positionAdvantage',
+               'firstType', 'secondType', 'workYear', 'education', 'salary', 'isSchoolJob', 'companyId', 'companyShortName',
+               'companyFullName', 'companySize', 'financeStage', 'industryField', 'industryLables', 'createTime',
+               'formatCreateTime', 'city', 'district', 'businessZones', 'linestaion', 'stationname']
+
+        f = open("data.txt", 'a', encoding='utf-8')
+        for position in position_list:
+            line = ""
+            for e in col:
+                if type(position[e]) == list:
+                    line += ',' + "\""+str(position[e]) + "\""
+                else:
+                    line += ',' + str(position[e])
+            line = str(self.cnt)+line
+            line += '\n'
+            f.write(line)
+            self.cnt += 1
 
 
-if __name__ == '__main__':
-    spider = LagouCrawl()
-    spider.start_crawl()
-    # for page in range(1, 31):
-    #     spider.page = page
-    #     spider.start_crawl()
-    #     print("page:", page)
+spider = LagouCrawl()
+for page in range(1, 31):
+    data = spider.start_crawl(page)
+    spider.save(data)
+    print(spider.data)
+    print("page:", page)
