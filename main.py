@@ -23,9 +23,8 @@ class LagouCrawl(object):
         self.data = {
             "first": True,
             "pn": '1',
-            "kd": 'python'
+            "kd": 'Java'
         }
-        self.cnt = 1
 
     def start_crawl(self, page):
         self.data['pn'] = str(page)
@@ -35,7 +34,7 @@ class LagouCrawl(object):
         dict_data = json.loads(data)
         return dict_data
 
-    def save(self, data):
+    def save(self, data, filename):
         position_list = data["content"]["positionResult"]["result"]
 
         col = ['positionId', 'positionLables', 'positionName', 'positionAdvantage',
@@ -43,23 +42,26 @@ class LagouCrawl(object):
                'companyFullName', 'companySize', 'financeStage', 'industryField', 'industryLables', 'createTime',
                'formatCreateTime', 'city', 'district', 'businessZones', 'linestaion', 'stationname']
 
-        f = open("data.txt", 'a', encoding='utf-8')
+        f = open(filename, 'a', encoding='utf-8')
         for position in position_list:
             line = ""
+            flag = False
             for e in col:
-                if type(position[e]) == list:
+                if flag:
                     line += ',' + "\""+str(position[e]) + "\""
                 else:
-                    line += ',' + str(position[e])
-            line = str(self.cnt)+line
+                    line += "\""+str(position[e]) + "\""
+                flag = True
             line += '\n'
             f.write(line)
-            self.cnt += 1
 
 
 spider = LagouCrawl()
-for page in range(1, 31):
+spider.params['city'] = '北京'
+spider.data['kd'] = 'Python'
+page = 30
+for page in range(1, page+1):
     data = spider.start_crawl(page)
-    spider.save(data)
+    spider.save(data, spider.params['city']+spider.data['kd']+'.txt')
     print(spider.data)
     print("page:", page)
