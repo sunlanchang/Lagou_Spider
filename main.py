@@ -34,7 +34,7 @@ class LagouCrawl(object):
         dict_data = json.loads(data)
         return dict_data
 
-    def get_page(self):
+    def get_page_num(self):
         data = self.start_crawl()
         items = data['content']['positionResult']['totalCount']
         import math
@@ -52,7 +52,7 @@ class LagouCrawl(object):
                'companyFullName', 'companySize', 'financeStage', 'industryField', 'industryLables', 'createTime',
                'formatCreateTime', 'city', 'district', 'businessZones', 'linestaion', 'stationname']
 
-        f = open(filename, 'a', encoding='utf-8')
+        f = open('data/'+filename, 'a', encoding='utf-8')
         for position in position_list:
             line = ""
             flag = False
@@ -66,12 +66,27 @@ class LagouCrawl(object):
             f.write(line)
 
 
-spider = LagouCrawl()
-page = spider.get_page()
-spider.params['city'] = '北京'
-spider.data['kd'] = 'Python'
-page = 30
-for page in range(1, page+1):
-    data = spider.start_crawl(page)
-    spider.save(data, spider.params['city']+spider.data['kd']+'.txt')
-    print("page:", page)
+positionName_list = []
+with open('position_name.txt', 'r') as f:
+    for line in f.readlines():
+        positionName_list += line.strip().split(',')
+
+city_list = ['全国', '上海', '杭州',
+             '广州', '深圳', '成都']
+
+for city in city_list:
+    try:
+        for name in positionName_list:
+            print('city: {} position_name: {}'.format(city, name))
+            spider = LagouCrawl()
+            spider.params['city'] = city
+            page = spider.get_page_num()
+            spider.data['kd'] = name
+            for page in range(1, page+1):
+                data = spider.start_crawl(page)
+                spider.save(
+                    data, spider.params['city']+spider.data['kd']+'.txt')
+                print("page:", page)
+    except Exception as e:
+        with open('error.txt', 'a') as f2:
+            f2.write(e)

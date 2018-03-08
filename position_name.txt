@@ -1,0 +1,3 @@
+Java,C++,PHP,数据挖掘,搜索算法,精准推荐,C,C#,全栈工程师,.NET,Hadoop,Python,Delphi,VB,Perl,Ruby,Node.js,Go,ASP,Shell,区块链,后端开发其它
+HTML5,Android,iOS,WP,移动开发其它
+web前端,Flash,html5,JavaScript,U3D,COCOS2D-X,前端开发其它
