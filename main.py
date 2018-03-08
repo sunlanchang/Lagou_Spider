@@ -23,16 +23,26 @@ class LagouCrawl(object):
         self.data = {
             "first": True,
             "pn": '1',
-            "kd": 'Java'
+            "kd": '技术总监'
         }
 
-    def start_crawl(self, page):
+    def start_crawl(self, page=1):
         self.data['pn'] = str(page)
         response = requests.post(
             self.url, params=self.params, data=self.data, headers=self.headers)
         data = response.content.decode('utf-8')
         dict_data = json.loads(data)
         return dict_data
+
+    def get_page(self):
+        data = self.start_crawl()
+        items = data['content']['positionResult']['totalCount']
+        import math
+        page = math.ceil(items/15)
+        if page > 30:
+            return 30
+        else:
+            return page
 
     def save(self, data, filename):
         position_list = data["content"]["positionResult"]["result"]
@@ -57,11 +67,11 @@ class LagouCrawl(object):
 
 
 spider = LagouCrawl()
+page = spider.get_page()
 spider.params['city'] = '北京'
 spider.data['kd'] = 'Python'
 page = 30
 for page in range(1, page+1):
     data = spider.start_crawl(page)
     spider.save(data, spider.params['city']+spider.data['kd']+'.txt')
-    print(spider.data)
     print("page:", page)
