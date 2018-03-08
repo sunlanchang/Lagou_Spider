@@ -8,7 +8,7 @@ def get_url_headers_params_data():
     }
     # 查询字符串
     params = {
-        "city": "北京",
+        "city": "",
                 "needAddtionalResult": False,
                 "isSchoolJob": 0
     }
@@ -16,6 +16,6 @@ def get_url_headers_params_data():
     data = {
         "first": True,
         "pn": '1',
-        "kd": 'Java'
+        "kd": ''
     }
     return url, headers, params, data

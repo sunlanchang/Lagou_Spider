@@ -1,11 +1,13 @@
 from function import *
 
 
-city = '北京'
-keyword = 'C++'
+city = ''
+keyword = ''
 page = 30
 url, headers, params, data = get_url_headers_params_data()
+
 f = open('position.txt', 'r', encoding='utf-8')
+
 for line in f.readlines():
     city_keyword = line.strip().split(',')
     city, keyword = city_keyword[0], city_keyword[1]
