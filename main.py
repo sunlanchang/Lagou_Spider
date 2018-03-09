@@ -71,22 +71,30 @@ with open('position_name.txt', 'r') as f:
     for line in f.readlines():
         positionName_list += line.strip().split(',')
 
-city_list = ['全国', '上海', '杭州',
+city_list = ['', '北京', '上海', '杭州',
              '广州', '深圳', '成都']
-
+f2 = open('info.txt', 'a')
+f3 = open('error.txt', 'a')
 for city in city_list:
     try:
         for name in positionName_list:
-            print('city: {} position_name: {}'.format(city, name))
-            spider = LagouCrawl()
-            spider.params['city'] = city
-            page = spider.get_page_num()
-            spider.data['kd'] = name
-            for page in range(1, page+1):
-                data = spider.start_crawl(page)
-                spider.save(
-                    data, spider.params['city']+spider.data['kd']+'.txt')
-                print("page:", page)
+            try:
+                print('city: {} position_name: {}'.format(city, name))
+                spider = LagouCrawl()
+                spider.params['city'] = city
+                spider.data['kd'] = name
+                page_num = spider.get_page_num()
+                for page in range(1, page_num+1):
+                    data = spider.start_crawl(page)
+                    spider.save(
+                        data, spider.params['city']+spider.data['kd']+'.txt')
+                info = "info  city: {} name: {} page: {}\n".format(
+                    city, name, page_num)
+                print(info)
+                f2.write(info)
+            except Exception as e:
+                print(e)
     except Exception as e:
-        with open('error.txt', 'a') as f2:
-            f2.write(e)
+        f3.write('error: '+str(e)+'\n')
+f2.close()
+f3.close()
