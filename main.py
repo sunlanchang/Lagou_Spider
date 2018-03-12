@@ -1,6 +1,8 @@
-from __future__ import print_function
+#%%
 import requests
 import json
+
+#%%
 
 
 class LagouCrawl(object):
@@ -65,7 +67,24 @@ class LagouCrawl(object):
             line += '\n'
             f.write(line)
 
+    def get_position_detail(self):
+        data = self.start_crawl()
+        position_id_list = []
+        position_list = data['content']['positionResult']['result']
+        for position in position_list:
+            position_id_list.append(position['positionId'])
+        for id in position_id_list:
+            url = 'https://www.lagou.com/jobs/'
+            url += str(id)+'.html'
+            print(url)
+        html_doc = requests.get(url, headers=self.headers).text
+        soup = BeautifulSoup(html_doc, 'lxml')
+        bonus = soup.select('.job-advantage p')
+        for bo in bonus:
+            print(bo.text.strip())
 
+
+#%%
 positionName_list = []
 with open('position_name.txt', 'r') as f:
     for line in f.readlines():
