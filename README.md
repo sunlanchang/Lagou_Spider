@@ -1,6 +1,6 @@
 # 拉勾网爬虫与数据挖掘
 ## 描述
-爬取拉勾网50万条职位信息，进行数据挖掘。
+爬取拉勾网50万条职位信息，进行数据清洗，数据挖掘。
 ## 环境
 - Ubuntu 16.04
 - mac OS 10.13.3 
@@ -53,6 +53,6 @@ password *****
 ```SQL
 mysql -u root -p database_name < dump.txt password ***** 
 ```
-### 参考
+## 参考
 https://www.jianshu.com/p/16cd37a5355f  
 https://www.zhihu.com/search?type=content&q=%E6%8B%89%E5%8B%BE%20%E7%88%AC%E8%99%AB
