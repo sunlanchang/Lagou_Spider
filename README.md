@@ -1,7 +1,7 @@
-# 拉勾网爬虫与数据分析
-# 描述
+# 拉勾网爬虫与数据挖掘
+## 描述
 爬取拉勾网50万条职位信息，进行数据挖掘。
-# 环境
+## 环境
 - Ubuntu 16.04
 - mac OS 10.13.3 
 - MySQL
@@ -11,7 +11,9 @@
 - VScode
 - Anaconda Jupyter Notebook
 - DataGrip
-# 用到的shell命令
+### 文件描述
+`position_name.txt`保存拉勾所有职位
+## 用到的shell命令
 统计文件行数
 ```shell
 wc -l file
