@@ -1,14 +1,6 @@
-import pymysql
-
-config = {
-    'host': '10.10.10.53',
-    'port': 3306,
-    'user': 'root',
-    'password': 'qsz961225',
-    'db': 'LAGOU',
-          'charset': 'utf8mb4',
-          'cursorclass': pymysql.cursors.DictCursor,
-}
-
-# Connect to the database
-connection = pymysql.connect(**config)
+import pandas as pd
+df = pd.DataFrame({"A": ["foo", "foo", "foo", "bar"], "B": [
+                  0, 1, 1, 1], "C": ["A", "A", "B", "A"]})
+print(df)
+df2 = df.drop_duplicates(subset=['A', 'C'], keep=False)
+print(df2)
