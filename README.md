@@ -11,7 +11,12 @@
 - VScode
 - Anaconda Jupyter Notebook
 - DataGrip
+### Python模块
+- request
+- BeautifulSoup
+- Json
 ### 文件描述
+`get_position.py`爬取拉勾网的爬虫程序
 `position_name.txt`保存拉勾所有职位
 ## 用到的shell命令
 统计文件行数
