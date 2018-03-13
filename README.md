@@ -3,10 +3,14 @@
 爬取拉勾网50万条职位信息，进行数据挖掘。
 # 环境
 - Ubuntu 16.04
+- mac OS 10.13.3 
 - MySQL
+- phpMyAdmin
+- Chrome
 - Python3
 - VScode
 - Anaconda Jupyter Notebook
+- DataGrip
 # 用到的shell命令
 统计文件行数
 ```shell
