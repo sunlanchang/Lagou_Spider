@@ -21,10 +21,17 @@
 ### 文件描述
 - `get_position.py`爬取拉勾网的爬虫程序
 - `position_name.txt`保存拉勾所有职位
-## 用到的shell命令
-统计文件行数
+## 其他常用命令
+- 统计文件行数
 ```shell
 wc -l file
+```
+- tmux
+```shell
+tmux new -s session
+tmux new -s session -d #在后台建立会话
+tmux ls #列出会话
+tmux attach -t session #进入某个会话
 ```
 # 数据库
 ## 查询
@@ -40,21 +47,27 @@ SELECT 职位名称,COUNT(职位名称) FROM L拉勾职位表 GROUP BY 职位名
 ```SQL
 CREATE TABLE `LAGOU`.`position` ( `ID` INT NOT NULL AUTO_INCREMENT , `positionId` INT(10) NOT NULL , `positionLables` VARCHAR(20) NOT NULL , `positionName` VARCHAR(20) NOT NULL , `positionAdvantage` VARCHAR(20) NOT NULL , `firstType` VARCHAR(20) NOT NULL , `secondType` VARCHAR(20) NOT NULL , `workYear` INT(10) NOT NULL , `education` VARCHAR(20) NOT NULL , `salary` VARCHAR(20) NOT NULL , `isSchoolJob` VARCHAR(5) NOT NULL , `companyId` INT(10) NOT NULL , `companyShortName` VARCHAR(20) NOT NULL , `companyFullName` VARCHAR(20) NOT NULL , `companySize` VARCHAR(20) NOT NULL , `financeStage` VARCHAR(20) NOT NULL , `industryField` VARCHAR(20) NOT NULL , `industryLables` VARCHAR(20) NOT NULL , `createTime` VARCHAR(20) NOT NULL , `formatCreateTime` VARCHAR(20) NOT NULL , `city` VARCHAR(20) NOT NULL , `district` VARCHAR(20) NOT NULL , `businessZones` VARCHAR(20) NOT NULL , `linestaion` VARCHAR(20) NOT NULL , `stationname` VARCHAR(20) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB
 ```
-## csv文件导入数据库
+## 导入导出数据库
+- csv文件导入数据库
 ```SQL
 load data local infile '/home/ubuntu//workspace/Lagou_Spider/lagou.txt'
 into table position_2
 fields terminated by ','  optionally enclosed by '"' escaped by '"'
 lines terminated by '\n';
 ```
-## 备份数据库
+- 导出数据库
 ```SQL
 mysqldump -u root -p database_name table_name > dump.txt
 password *****
 ```
-## 导入数据库sql文件
+- 导出文件
+```sql
+SELECT * FROM passwd INTO OUTFILE '/tmp/tutorials.txt' FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n';
+```
+- 导入数据库sql文件
 ```SQL
-mysql -u root -p database_name < dump.txt password ***** 
+mysql -u root -p database_name < dump.txt password *****
 ```
 ## 参考
 https://www.jianshu.com/p/16cd37a5355f  
