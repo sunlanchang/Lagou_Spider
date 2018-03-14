@@ -21,6 +21,18 @@
 ### 文件描述
 - `get_position.py`爬取拉勾网的爬虫程序
 - `position_name.txt`保存拉勾所有职位
+## 数据获取
+使用Chrom分析拉勾源码，发现拉勾网使用Ajax请求数据，并且返回的数据是Json格式，处理起来非常方便
+## 数据清洗
+## 数据分析
+- 前100公司的招收人数
+```sql
+SELECT 企业简称,COUNT(企业简称) as cnt FROM L拉勾 GROUP BY 企业简称 ORDER BY cnt DESC LIMIT 100;
+```
+- 月薪最高的100个职位
+```sql
+SELECT 职位名称,avg(工资) as money FROM L拉勾 GROUP BY 职位名称 ORDER BY money DESC LIMIT 100
+```
 ## 其他常用命令
 - 统计文件行数
 ```shell
