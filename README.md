@@ -24,6 +24,18 @@
 ## 数据获取
 使用Chrom分析拉勾源码，发现拉勾网使用Ajax请求数据，并且返回的数据是Json格式，处理起来非常方便
 ## 数据清洗
+- 工作年限的提取
+```sql
+ALTER TABLE L拉勾 ADD 工作年限 INT NULL;
+ALTER TABLE L拉勾
+  MODIFY COLUMN 工作年限 INT AFTER 工龄;
+UPDATE L拉勾 SET 工作年限 = 4 WHERE 工龄 = '3-5年';
+UPDATE L拉勾 SET 工作年限 = 2 WHERE 工龄 = '1-3年';
+UPDATE L拉勾 SET 工作年限 = 8 WHERE 工龄 = '5-10年';
+UPDATE L拉勾 SET 工作年限 = 10 WHERE 工龄 = '十年以上';
+UPDATE L拉勾 SET 工作年限 = 1 WHERE 工龄 = '一年以下';
+UPDATE L拉勾 SET 工作年限 = 0 WHERE 工龄 = '应届毕业生';
+```
 ## 数据分析
 - 前100公司的招收人数
 ```sql
