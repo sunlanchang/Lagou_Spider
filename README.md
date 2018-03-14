@@ -24,6 +24,10 @@
 ## 数据获取
 使用Chrom分析拉勾源码，发现拉勾网使用Ajax请求数据，并且返回的数据是Json格式，处理起来非常方便
 ## 数据清洗
+### 去重
+经过手工的查看有大量的重复值，使用`pandas`的`drop_duplicates(subset=['positionId'])`将重复的`positionId`去掉，只保留一行重复记录。
+### 处理缺失值
+### 其他
 - 工作年限的提取
 ```sql
 ALTER TABLE L拉勾 ADD 工作年限 INT NULL;
