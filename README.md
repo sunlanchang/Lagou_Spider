@@ -86,7 +86,26 @@ SELECT 学历,avg(工资) as money FROM L拉勾 GROUP BY 学历 ORDER BY money D
 SELECT 企业简称,COUNT(企业简称) as cnt ,avg(工资) as money FROM L拉勾 GROUP BY 企业简称 ORDER BY cnt DESC,money DESC LIMIT 100
 ```
 ## 利用SKlearn进行数据分析
+## 中文分词
+先构建一个字典过滤标点符号，通过Python的`jieba`模块进行精确匹配模式进行分词后用空格分隔。如下图所示：  
+```python
+# encoding=utf-8
+import jieba
+
+seg_list = jieba.cut("我来到北京清华大学", cut_all=True)
+print("Full Mode: " + "/ ".join(seg_list))  # 全模式
+
+seg_list = jieba.cut("我来到北京清华大学", cut_all=False)
+print("Default Mode: " + "/ ".join(seg_list))  # 精确模式
+
+seg_list = jieba.cut("他来到了网易杭研大厦")  # 默认是精确模式
+print(", ".join(seg_list))
+
+seg_list = jieba.cut_for_search("小明硕士毕业于中国科学院计算所，后在日本京都大学深造")  # 搜索引擎模式
+print(", ".join(seg_list))
+```
 ## 特征选择
+
 ## 特征提取
 > 稀疏矩阵  
 由于大多数文本文档通常只使用文本词向量全集中的一个小子集，所以得到的矩阵将具有许多特征值为零（通常大于99％）。  
