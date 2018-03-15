@@ -5,9 +5,11 @@
 **操作系统**  
 - Ubuntu 16.04
 - mac OS 10.13.3 
+
 **数据获取**  
 - Chrome
 - Python3
+
 **数据清洗**  
 - Excel
 - DataGrip
@@ -15,6 +17,7 @@
 - phpMyAdmin
 - VScode
 - Anaconda Jupyter Notebook
+
 **数据分析**  
 - Excel
 - DataGrip
@@ -38,11 +41,12 @@
 ![](./readme_picture/json.png)
 - 需要的职位信息在`object -> content -> positionResult -> result`
 ![](./readme_picture/json_tree.png)
+- 拉勾的反爬虫策略
 ## 数据清洗
 ### 去重
 - 经过手工的查看有大量的重复值，使用`pandas`的`drop_duplicates(subset=['positionId'])`将重复的`positionId`去掉，只保留一行重复记录。
 - 用`pandas`的`pandas.DataFrame.to_csv()`将去重的文件保存为csv文件
-- 将csv文件
+- Excel 2016打开去重的csv文件，利用快速填充提取字段的`4k-8k`等工资字段，取平均值。工作年限使用同样的操作提取
 - 创建MySQL数据库以导入csv文件，创建数据库如下,这里用的是`phpMyAdmin`手动创建数据库字段，自动生成创建语句：
 ```sql
 CREATE TABLE `LAGOU`.`position` ( `ID` INT NOT NULL AUTO_INCREMENT , `positionId` INT(10) NOT NULL , `positionLables` VARCHAR(20) NOT NULL , `positionName` VARCHAR(20) NOT NULL , `positionAdvantage` VARCHAR(20) NOT NULL , `firstType` VARCHAR(20) NOT NULL , `secondType` VARCHAR(20) NOT NULL , `workYear` INT(10) NOT NULL , `education` VARCHAR(20) NOT NULL , `salary` VARCHAR(20) NOT NULL , `isSchoolJob` VARCHAR(5) NOT NULL , `companyId` INT(10) NOT NULL , `companyShortName` VARCHAR(20) NOT NULL , `companyFullName` VARCHAR(20) NOT NULL , `companySize` VARCHAR(20) NOT NULL , `financeStage` VARCHAR(20) NOT NULL , `industryField` VARCHAR(20) NOT NULL , `industryLables` VARCHAR(20) NOT NULL , `createTime` VARCHAR(20) NOT NULL , `formatCreateTime` VARCHAR(20) NOT NULL , `city` VARCHAR(20) NOT NULL , `district` VARCHAR(20) NOT NULL , `businessZones` VARCHAR(20) NOT NULL , `linestaion` VARCHAR(20) NOT NULL , `stationname` VARCHAR(20) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB
@@ -50,7 +54,7 @@ CREATE TABLE `LAGOU`.`position` ( `ID` INT NOT NULL AUTO_INCREMENT , `positionId
 ### 处理缺失值
 
 ### 其他
-- 工作年限的提取
+- 缺失值
 
 ```sql
 ALTER TABLE L拉勾 ADD 工作年限 INT NULL;
