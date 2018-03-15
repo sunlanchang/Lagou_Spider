@@ -142,4 +142,5 @@ tmux attach -t session #进入某个会话
 > https://www.zhihu.com/search?type=content&q=%E6%8B%89%E5%8B%BE%20%E7%88%AC%E8%99%AB>
 > https://www.w3cschool.cn/mysql/mysql-database-export.html  
 > http://blog.csdn.net/liuxuejiang158blog/article/details/31360765  
-> http://blog.csdn.net/tiffany_li2015/article/details/50236833
+> http://blog.csdn.net/tiffany_li2015/article/details/50236833  
+> http://sklearn.apachecn.org/cn/0.19.0/modules/feature_extraction.html
