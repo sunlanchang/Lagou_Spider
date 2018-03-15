@@ -1,6 +1,6 @@
 # 拉勾网爬虫与数据挖掘
 ## 描述
-爬取拉勾网50万条职位信息，进行数据清洗，数据挖掘。
+爬取拉勾网50万条职位信息，进行数据清洗，简单的数据分析。
 ## 环境
 **操作系统**  
 - Ubuntu 16.04
@@ -86,18 +86,6 @@ SELECT 学历,avg(工资) as money FROM L拉勾 GROUP BY 学历 ORDER BY money D
 SELECT 企业简称,COUNT(企业简称) as cnt ,avg(工资) as money FROM L拉勾 GROUP BY 企业简称 ORDER BY cnt DESC,money DESC LIMIT 100
 ```
 
-## 其他常用命令
-- 统计文件行数
-```shell
-wc -l file
-```
-- tmux
-```shell
-tmux new -s session
-tmux new -s session -d #在后台建立会话
-tmux ls #列出会话
-tmux attach -t session #进入某个会话
-```
 # 数据库
 ## 查询
 - 去重查询
@@ -135,6 +123,19 @@ lines terminated by '\n';
 - 导入数据库sql文件
 ```SQL
 mysql -u root -p database_name < dump.txt password *****
+```
+
+## 其他常用命令
+- 统计文件行数
+```shell
+wc -l file
+```
+- tmux
+```shell
+tmux new -s session
+tmux new -s session -d #在后台建立会话
+tmux ls #列出会话
+tmux attach -t session #进入某个会话
 ```
 ## 参考
 > https://www.jianshu.com/p/16cd37a5355f>  
