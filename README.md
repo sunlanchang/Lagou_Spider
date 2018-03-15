@@ -22,7 +22,12 @@
 - `get_position.py`爬取拉勾网的爬虫程序
 - `position_name.txt`保存拉勾所有职位
 ## 数据获取
-使用Chrom分析拉勾源码，发现拉勾网使用Ajax请求数据，并且返回的数据是Json格式，处理起来非常方便
+- 使用Chrom分析拉勾源码，发现拉勾网使用Ajax请求数据如下图所示：
+![](./readme_picture/ajax.png)
+- 返回的数据是Json格式，处理起来非常方便，如下图所示：
+![](./readme_picture/json.png)
+- 需要的职位信息在`object -> content -> positionResult -> result`
+![](./readme_picture/json_tree.png)
 ## 数据清洗
 ### 去重
 经过手工的查看有大量的重复值，使用`pandas`的`drop_duplicates(subset=['positionId'])`将重复的`positionId`去掉，只保留一行重复记录。
@@ -43,15 +48,15 @@ UPDATE L拉勾 SET 工作年限 = 0 WHERE 工龄 = '应届毕业生';
 ## 数据分析
 - 前100公司的招收人数
 ```sql
-SELECT 企业简称,COUNT(企业简称) as cnt FROM L拉勾 GROUP BY 企业简称 ORDER BY cnt DESC LIMIT 100;
+SELECT 企业简称,COUNT(企业简称) as cnt FROM L拉勾 GROUP BY 企业简称 ORDER BY cnt DESC LIMIT 100
 ```
 - 月薪最高的100个职位
 ```sql
-SELECT 职位名称,avg(工资) as money FROM L拉勾 GROUP BY 职位名称 ORDER BY money DESC LIMIT 100;
+SELECT 职位名称,avg(工资) as money FROM L拉勾 GROUP BY 职位名称 ORDER BY money DESC LIMIT 100
 ```
 - 学历水平工资
 ```sql
-SELECT 学历,avg(工资) as money FROM L拉勾 GROUP BY 学历 ORDER BY money DESC;
+SELECT 学历,avg(工资) as money FROM L拉勾 GROUP BY 学历 ORDER BY money DESC
 ```
 - 各个公司招收人的工薪水平
 ```sql
