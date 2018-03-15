@@ -85,7 +85,13 @@ SELECT 学历,avg(工资) as money FROM L拉勾 GROUP BY 学历 ORDER BY money D
 ```sql
 SELECT 企业简称,COUNT(企业简称) as cnt ,avg(工资) as money FROM L拉勾 GROUP BY 企业简称 ORDER BY cnt DESC,money DESC LIMIT 100
 ```
-
+## 利用SKlearn进行数据分析
+## 特征选择
+## 特征提取
+> 稀疏矩阵  
+由于大多数文本文档通常只使用文本词向量全集中的一个小子集，所以得到的矩阵将具有许多特征值为零（通常大于99％）。  
+例如，10,000 个短文本文档（如电子邮件）的集合将使用总共100,000个独特词的大小的词汇，而每个文档将单独使用100到1000个独特的单词。  
+为了能够将这样的矩阵存储在存储器中，并且还可以加速代数的矩阵/向量运算，实现通常将使用诸如 scipy.sparse 包中的稀疏实现。
 # 数据库
 ## 查询
 - 去重查询
