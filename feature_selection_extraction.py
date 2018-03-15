@@ -16,7 +16,9 @@ connection = pymysql.connect(host='localhost',
                              charset='utf8',
                              cursorclass=pymysql.cursors.DictCursor)
 cursor = connection.cursor()
+
 sql = 'SELECT detail FROM `detail` limit 10'
+
 cursor.execute(sql)
 detail_list = cursor.fetchall()corpus_before = []
 for detail in detail_list:
@@ -24,6 +26,7 @@ for detail in detail_list:
 print(corpus_before.__len__())
 chrs = ['，', '。', '！', '、', '；', '：', '？', '~',
         '(', ')', '；', ';', ',', '\n', '\t', '/', '-', '.', '\'']
+
 corpus = []
 for line in corpus_before:
     for ch in chrs:
