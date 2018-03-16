@@ -96,6 +96,7 @@ SELECT 职位名称,avg(工资) as money FROM L拉勾 GROUP BY 职位名称 ORDE
 ```sql
 SELECT 学历,avg(工资) as money FROM L拉勾 GROUP BY 学历 ORDER BY money DESC
 ```
+![](./analysis_picture/degree_salary.png)
 - 各个公司招收人的工薪水平
 ```sql
 SELECT 企业简称,COUNT(企业简称) as cnt ,avg(工资) as money FROM L拉勾 GROUP BY 企业简称 ORDER BY cnt DESC,money DESC LIMIT 100
