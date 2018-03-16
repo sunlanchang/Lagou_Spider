@@ -79,7 +79,7 @@ UPDATE L拉勾 SET 工作年限 = 0 WHERE 工龄 = '应届毕业生';
 ### 利用MySQL进行简单的统计分析
 - 招收人数最多的几个职位
 ```sql
-SELECT 
+SELECT 公司简称, COUNT(公司简称) as cnt FROM L拉勾 GROUP BY 公司简称 
 ```
 ![](./analysis_picture/position_order.jpg)
 - 前100公司的招收人数
@@ -167,7 +167,7 @@ lines terminated by '\n';
 mysql -u root -p database_name < dump.txt password *****
 ```
 
-## 其他常用命令
+## 其他常用命令和脚本
 - 统计文件行数
 ```shell
 wc -l file
@@ -178,6 +178,17 @@ tmux new -s session
 tmux new -s session -d #在后台建立会话
 tmux ls #列出会话
 tmux attach -t session #进入某个会话
+```
+
+- 合并文件
+```python
+import os
+filenames = os.listdir("./position_id_files/")
+with open('all_describe_to_one.txt','a',encoding='utf-8') as f_write:
+    for filename in filenames:
+        with open('./position_id_files/'+filename,'r',encoding='utf-8') as f_read:
+            for line in f_read.readlines():
+                f_write.write(line)
 ```
 ## 参考
 > https://www.jianshu.com/p/16cd37a5355f>  
