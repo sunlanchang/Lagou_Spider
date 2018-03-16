@@ -190,6 +190,14 @@ with open('all_describe_to_one.txt','a',encoding='utf-8') as f_write:
             for line in f_read.readlines():
                 f_write.write(line)
 ```
+
+- 去重
+```python
+import pandas as pd
+df = pd.read_csv(ready_to_read_file)
+df2=df.drop_duplicates(subset=['positionId'])
+df2.to_csv(ready_to_write_file)
+```
 ## 参考
 > https://www.jianshu.com/p/16cd37a5355f>  
 > https://www.zhihu.com/search?type=content&q=%E6%8B%89%E5%8B%BE%20%E7%88%AC%E8%99%AB>
