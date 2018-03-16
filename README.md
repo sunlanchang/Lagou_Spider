@@ -24,6 +24,14 @@
 - MySQL
 - phpMyAdmin
 - Anaconda Jupyter Notebook
+
+**数据可视化**
+- HTML
+- Bootstrap
+- JavaScript
+- PHP
+- Echarts
+
 ### Python模块
 - request
 - BeautifulSoup
@@ -70,6 +78,9 @@ UPDATE L拉勾 SET 工作年限 = 0 WHERE 工龄 = '应届毕业生';
 ## 数据分析
 ### 利用MySQL进行简单的统计分析
 - 招收人数最多的几个职位
+```sql
+SELECT 
+```
 ![](./analysis_picture/position_order.jpg)
 - 前100公司的招收人数
 ```sql
