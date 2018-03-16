@@ -90,6 +90,7 @@ SELECT 企业简称,COUNT(企业简称) as cnt FROM L拉勾 GROUP BY 企业简�
 - 月薪最高的100个职位
 ```sql
 SELECT 职位名称,avg(工资) as money FROM L拉勾 GROUP BY 职位名称 ORDER BY money DESC LIMIT 100
+![](./analysis_picture/position_salary.png)
 ```
 - 学历水平工资
 ```sql
