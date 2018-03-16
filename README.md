@@ -101,6 +101,7 @@ SELECT 学历,avg(工资) as money FROM L拉勾 GROUP BY 学历 ORDER BY money D
 ```sql
 SELECT 企业简称,COUNT(企业简称) as cnt ,avg(工资) as money FROM L拉勾 GROUP BY 企业简称 ORDER BY cnt DESC,money DESC LIMIT 100
 ```
+![](./analysis_picture/salary_for_company.jpg)
 ## 利用SKlearn进行数据分析
 ## 中文分词
 先构建一个字典过滤标点符号，通过Python的`jieba`模块进行精确匹配模式进行分词后用空格分隔。示例如下：  
