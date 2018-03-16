@@ -140,7 +140,8 @@ SELECT * FROM passwd INTO OUTFILE '/tmp/tutorials.txt' FIELDS TERMINATED BY ',' 
 LINES TERMINATED BY '\r\n';
 ```
 ### 导入数据库
-- csv文件导入数据库
+- csv文件导入数据库  
+
 ```SQL
 load data local infile '/home/ubuntu//workspace/Lagou_Spider/lagou.txt'
 into table position_2
