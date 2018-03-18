@@ -1,6 +1,11 @@
 # 拉勾网爬虫与数据挖掘
 ## 描述
 爬取拉勾网50万条职位信息，进行数据清洗，简单的数据分析。
+
+
+
+
+
 ## 环境
 **操作系统**  
 - Ubuntu 16.04
@@ -51,7 +56,13 @@
 ![](./readme_picture/json_tree.png)
 - 拉勾的反爬虫策略
 ## 数据清洗
-### 去重
+###  去重(SQL)
+```sql
+CREATE TABLE tmp2 as select min(id) as mid from tab3 group by 职位ID
+
+CREATE TABLE lagou2 as SELECT * FROM lagou WHERE id in (SELECT mid from tmp2)
+``` 
+### 去重(Pandas)
 - 经过手工的查看有大量的重复值，使用`pandas`的`drop_duplicates(subset=['positionId'])`将重复的`positionId`去掉，只保留一行重复记录。
 - 用`pandas`的`pandas.DataFrame.to_csv()`将去重的文件保存为csv文件
 - Excel 2016打开去重的csv文件，利用快速填充提取字段的`4k-8k`等工资字段，取平均值。工作年限使用同样的操作提取
