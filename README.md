@@ -103,26 +103,48 @@ SELECT 企业简称,COUNT(企业简称) as cnt ,avg(工资) as money FROM L拉�
 ```
 ![](./analysis_picture/salary_for_company.jpg)
 ## 利用SKlearn进行数据分析
-## 中文分词
+## 数据预处理（中文分词、去除标点符号）
 先构建一个字典过滤标点符号，通过Python的`jieba`模块进行精确匹配模式进行分词后用空格分隔。示例如下：  
 ```python
 # encoding=utf-8
-import jieba
-
-seg_list = jieba.cut("我来到北京清华大学", cut_all=True)
-print("Full Mode: " + "/ ".join(seg_list))  # 全模式
-
-seg_list = jieba.cut("我来到北京清华大学", cut_all=False)
-print("Default Mode: " + "/ ".join(seg_list))  # 精确模式
-
-seg_list = jieba.cut("他来到了网易杭研大厦")  # 默认是精确模式
-print(", ".join(seg_list))
-
-seg_list = jieba.cut_for_search("小明硕士毕业于中国科学院计算所，后在日本京都大学深造")  # 搜索引擎模式
-print(", ".join(seg_list))
+chrs = ['，','。','！','、','；','：','？','~','(',')','；',';',',','\n','\t','/','-','.','\'']
+corpus = []
+for line in corpus_raw:
+    for ch in chrs:
+        line = line.replace(ch,'')
+    Word_spilt_jieba = jieba.cut(line,cut_all = False)
+    line = ' '.join(Word_spilt_jieba)
+    corpus.append(line)
+print(corpus[0:3])
+```
+**对于职位的描述分词之后的结果如下所示，包含一些明确的关键词，同样也包含一些无关紧要的数字，在这里先不处理数字英文单词之类的（后续的预测准确率表明数字对结果影响不大）：**
+```
+职位 要求 1 有 互联网 和 移动 互联网 行业 3 年 以上 产品 经理 从业 经验 2 独立 承担 项目 丰富 的 ERP 产品设计 经验 2 懂 app 基本 设计 流程 熟悉 微信 公众 号 的 后台 框架 及 运营 3 具备 项目 方案 起草 需求 整理 开发计划 及 相关 业务 对接 的 能力 4 有 很 强 的 产品 逻辑 与 项目 执行 能力 协调 沟通 部门 内外部 的 资源 5 具备 决策 和 项目 团队 管理 经验
 ```
 ## 特征选择
-`from sklearn.feature_extraction.text import CountVectorizer`
+### 词袋模型（ Bag-of-Words Model ）
+
+1. 使用机器学习算法时，我们不能直接使用文本。相反，我们需要将文本转换为数字。  
+1. 对文档进行分类，每一类文档都是“输入”，而类别标签是我们预测算法的“输出”。算法将数字向量作为输入，因此我们需要将文档转换为固定长度的数字向量。  
+1. 上面这一步可以通过为每个单词分配一个唯一的编码来完成。我们所看到的任何文档都可以被编码为一个固定长度的矢量，其长度为文档中全部已知单词的词汇量。矢量中每个位置的值可以用编码文档中每个单词的出现个数或频率填充。  
+1. 在词袋模型中，我们只关心编码方案，而编码方案描述了文档中出现了什么单词，以及这些单词在编码文档中出现的频率，而没有任何关于顺序的信息。  
+
+**对所有职位信息通过Python拉取数据库数据进行遍历，构建一个非常大的词袋，拉去50条职位描述信息时，构成的词袋长度就有2000条左右，这里局限于个人电脑和服务器的内存太小只用了小样本进行了构建词袋**
+
+### 使用 CountVectorizer 计算字数
+CountVectorizer 提供了一个简单的方法，既可以标记文本文档的集合, 也可以生成每个已知单词的索引, 还可以使用这一套索引对新文档进行编码。  
+
+下面是一种使用方法：
+- 实例化一个 CountVectorizer 类。
+- 调用 fit() 函数以从一个或多个文档中建立索引。
+- 根据需要在一个或多个文档中调用 transform() 函数，将每个文档编码为一个向量。
+
+```
+#该类会将文本中的词语转换为词频矩阵，矩阵元素a[i][j] 表示j词在i类文本下的词频  
+vectorizer=CountVectorizer()    
+X = vectorizer.fit_transform(corpus)
+```
+
 > 稀疏矩阵  
 由于大多数文本文档通常只使用文本词向量全集中的一个小子集，所以得到的矩阵将具有许多特征值为零（通常大于99％）。  
 例如，10,000 个短文本文档（如电子邮件）的集合将使用总共100,000个独特词的大小的词汇，而每个文档将单独使用100到1000个独特的单词。  
@@ -132,6 +154,7 @@ print(", ".join(seg_list))
 在一个大的文本语料库中，一些单词将出现很多次（例如 “the”, “a”, “is” 是英文），因此对文档的实际内容没有什么有意义的信息。 如果我们将直接计数数据直接提供给分类器，那么这些频繁词组会掩盖住那些我们关注但很少出现的词。  
 为了为了重新计算特征权重，并将其转化为适合分类器使用的浮点值，因此使用 tf-idf 变换是非常常见的。  
 - 如何使用 CountVectorizer 将文本转换为文字计数向量。
+`from sklearn.feature_extraction.text import CountVectorizer`
 - 如何使用 TfidfVectorizer 将文本转换为词频向量。
 # 数据库
 ## 查询
