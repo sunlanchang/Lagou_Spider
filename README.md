@@ -54,6 +54,8 @@
 ![](./readme_picture/json.png)
 - 需要的职位信息在`object -> content -> positionResult -> result`
 ![](./readme_picture/json_tree.png)
+- 使用多线程策略在mac中，校园网环境下进行职位详情页的爬取，并采用BeautifulSoup4提取出网页中需要的文字信息，以便后期大数据分析。处理速度达到了每秒20个职位。
+
 - 拉勾的反爬虫策略
 ## 数据清洗
 ###  去重(SQL)
