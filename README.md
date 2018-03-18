@@ -1,6 +1,6 @@
 # 拉勾网爬虫与数据挖掘
 ## 描述
-爬取拉勾网60万条职位信息，进行数据清洗，简单的数据分析。
+爬取拉勾网50万条职位信息，进行数据清洗，简单的数据分析。
 ## 环境
 **操作系统**  
 - Ubuntu 16.04
@@ -208,3 +208,4 @@ df2.to_csv(ready_to_write_file)
 > http://blog.csdn.net/liuxuejiang158blog/article/details/31360765  
 > http://blog.csdn.net/tiffany_li2015/article/details/50236833  
 > http://sklearn.apachecn.org/cn/0.19.0/modules/feature_extraction.html
+> http://www.cnblogs.com/qcloud1001/p/8444576.html  
