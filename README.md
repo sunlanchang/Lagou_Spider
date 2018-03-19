@@ -46,6 +46,7 @@
 - pandas
 - matplotlib
 - sklearn
+- pymysql
 ### 文件描述
 - `get_position.py`爬取拉勾网的爬虫程序
 - `position_name.txt`保存拉勾所有职位
