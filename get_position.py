@@ -3,7 +3,7 @@ import json
 
 
 class LagouCrawl(object):
-
+    # 初始化类，注意拉勾有反爬虫策略，Cookie要一天换一次才可以，更换方法为登录拉勾后找到Ajax请求页的header中有Cookie
     def __init__(self):
         self.url = "https://www.lagou.com/jobs/positionAjax.json"
         # 请求头
@@ -25,6 +25,7 @@ class LagouCrawl(object):
             "kd": '技术总监'
         }
 
+    # 抓取Json数据，转换为字典类型并返回
     def start_crawl(self, page=1):
         self.data['pn'] = str(page)
         response = requests.post(
@@ -33,6 +34,7 @@ class LagouCrawl(object):
         dict_data = json.loads(data)
         return dict_data
 
+    # 获得每一个职位在拉勾网有几页数据，用于批量抓取数据
     def get_page_num(self):
         data = self.start_crawl()
         items = data['content']['positionResult']['totalCount']
@@ -43,6 +45,7 @@ class LagouCrawl(object):
         else:
             return page
 
+    # 提取Json数据中有用的信息，并且保存到本地
     def save(self, data, filename):
         position_list = data["content"]["positionResult"]["result"]
 
@@ -70,6 +73,7 @@ with open('position_name.txt', 'r') as f:
     for line in f.readlines():
         positionName_list += line.strip().split(',')
 
+# 拉勾提供的城市，空串为全国地区
 city_list = ['', '北京', '上海', '杭州',
              '广州', '深圳', '成都']
 f2 = open('info.txt', 'a')
