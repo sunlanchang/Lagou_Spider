@@ -9,6 +9,7 @@ from sklearn import feature_extraction
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 
+# Python连接数据库
 connection = pymysql.connect(host='localhost',
                              user='root',
                              password='6865215441',
@@ -18,8 +19,8 @@ connection = pymysql.connect(host='localhost',
 cursor = connection.cursor()
 
 sql = 'SELECT detail FROM `detail` limit 10'
-
 cursor.execute(sql)
+
 detail_list = cursor.fetchall()corpus_before = []
 for detail in detail_list:
     corpus_before.append(detail['detail'])

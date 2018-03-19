@@ -8,6 +8,7 @@ headers = {
 }
 
 
+# 抓取每一个职位的详情页面，用于后续的数据分析的职位分类预测。
 def get_position_detail(filename):
     position_id_list = []
     with open(filename, 'r', encoding='utf-8') as f:
