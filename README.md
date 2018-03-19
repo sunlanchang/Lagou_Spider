@@ -3,7 +3,7 @@
 爬取拉勾网50万条职位信息，进行数据清洗，简单的数据分析。流程图如下：
 ![](./readme_picture/Lagou.png)
 
-一个demo展示外观：
+**一个demo展示外观：**
 ![](./readme_picture/index.jpg)
 
 ## 环境
